@@ -1,47 +1,33 @@
-//DECLARATIVE
-pipeline {
-    // agent any
-    agent { docker { image 'maven:3.6.3'}}
-    environment{
-        dockerHome = tool 'myDocker'
-        mavenHome = tool 'myMaven'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+node {
+    def app
+
+    stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
+
+        checkout scm
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn --version'
-                sh 'docker version'
-                echo "Build"
-                echo "PATH - $PATH"
-                echo "Build_NUMBER - $env.BUILD_NUMBER"
-                echo "Build_ID - $env.BUILD_ID"
-                echo "JOB_NAME - $env.JOB_NAME"
-                echo "BUILD_TAG - $env.BUILD_TAG"
-                echo "BUILD_URL - $env.BUILD_URL"
-            }
-        }
-        stage('Test') {
-            steps {
-                echo "Test"
-            }
-        }
-        stage('Integration Test') {
-            steps {
-                echo "Integration Test"
-            }
+
+    stage('Build image') {
+        /* This builds the actual image */
+
+        app = docker.build("arundhwaj/hello-world-jenkins")
+    }
+
+    stage('Test image') {
+        
+        app.inside {
+            echo "Tests passed"
         }
     }
 
-    post {
-        always {
-            echo 'I run always'
-        }
-        success {
-            echo 'I run when i m suceessful'
-        }
-        failure {
-            echo 'I run when i m failure'
-        }
+    stage('Push image') {
+        /* 
+			You would need to first register with DockerHub before you can push images to your account
+		*/
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+            } 
+                echo "Trying to Push Docker Build to DockerHub"
     }
 }
