@@ -6,7 +6,7 @@ pipeline {
        dockerHome = tool 'myDocker'
        mavenHome = tool 'myMaven'
        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-        registry = "arundhwaj/arundhwaj@123"
+       registry = "arundhwaj/hello-world-jenkins"
        registryCredential = 'dockerhub'  
     }
     stages {
