@@ -31,7 +31,24 @@ pipeline {
                 echo "Integration Test"
             }
         }
-        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("arundhwaj/hello-world-jenkins:${env.BUILD_TAG}")
+                }    
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('', 'myDockerHub')
+                    {
+                        dockerImage.push();
+                        dockerImage.push('latest');
+                    }
+                }    
+            }
+        }
     }
     post {
         always {
