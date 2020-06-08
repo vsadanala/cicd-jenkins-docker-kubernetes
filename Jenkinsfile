@@ -28,6 +28,7 @@ pipeline {
                 steps {
                     git 'https://github.com/ArunDhwaj/hello-world-jenkins'
                 }
+            }    
         }
         stage('Test') {
             steps {
