@@ -31,27 +31,8 @@ pipeline {
                 echo "Integration Test"
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                //docker build -t arundhwaj/FootballMatch:Prod-v1
-                script {
-                    dockerImage = docker.build("arundhwaj/FootballMatch:${env.BUILD_TAG}")
-                }
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('', 'myDockerHub') {
-                        dockerImage.push()
-                        dockerImage.push('latest')
-                    }
-                
-                }
-            }
-        }
+        
     }
-
     post {
         always {
             echo 'I run always'
