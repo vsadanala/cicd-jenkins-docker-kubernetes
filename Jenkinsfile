@@ -7,7 +7,7 @@ pipeline {
        mavenHome = tool 'myMaven'
        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
         registry = "arundhwaj/hello-world-jenkins"
-       registryCredential = ‘dockerhub’  
+       registryCredential = 'dockerhub'  
     }
     stages {
         stage('Checkout') {
