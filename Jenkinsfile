@@ -23,6 +23,7 @@ pipeline {
                 echo "BUILD_URL - $env.BUILD_URL"
             }
         }  
+    }   
         stages {
             stage('Cloning our Git') {
                 steps {
