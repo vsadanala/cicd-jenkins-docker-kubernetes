@@ -43,9 +43,8 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    
-                        dockerImage.push();
-                        dockerImage.push('latest');
+                     docker.build registry + ":${env.BUILD_TAG}"
+                     
                     
                 }    
             }
