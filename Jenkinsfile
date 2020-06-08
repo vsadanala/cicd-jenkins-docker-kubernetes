@@ -6,6 +6,8 @@ pipeline {
        dockerHome = tool 'myDocker'
        mavenHome = tool 'myMaven'
        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+       registry = "arundhwaj/docker-test"
+       registryCredential = ‘dockerhub’ 
     }
     stages {
         stage('Checkout') {
