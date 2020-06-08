@@ -36,16 +36,15 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("arundhwaj/hello-world-jenkins:${env.BUILD_TAG}")
+                    dockerImage = docker.build registry + ":${env.BUILD_TAG}"
                 }    
             }
         }
         stage('Push Docker Image') {
             steps {
                 script {
-                     docker.build registry + ":${env.BUILD_TAG}"
-                     
-                    
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
                 }    
             }
         }
