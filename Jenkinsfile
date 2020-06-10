@@ -5,6 +5,8 @@ pipeline {
     environment{
        dockerHome = tool 'myDocker'
        mavenHome = tool 'myMaven'
+        registry = "arundhwaj/hello-world-jenkins"
+    registryCredential = 'mydockerhub' 
        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
     stages {
@@ -42,10 +44,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', 'mydockerhub') {
-                        dockerImage.push()
-                        dockerImage.push('latest')
-                    }
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                  }
 
                 }
             }
