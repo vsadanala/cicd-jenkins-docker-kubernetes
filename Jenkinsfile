@@ -31,11 +31,7 @@ pipeline {
                 echo "Integration Test"
             }
         }
-        stage('Integration Test') {
-              steps {
-                  sh "mvn package -DskipTests"
-              }
-         }
+        
       
         stage('Build Docker Image') {
             steps {
