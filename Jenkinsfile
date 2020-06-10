@@ -20,7 +20,7 @@ pipeline {
                 echo "BUILD_TAG - $env.BUILD_TAG"
                 echo "BUILD_URL - $env.BUILD_URL"
             }
-        }
+        }        
         stage('Test') {
             steps {
                 echo "Test"
@@ -31,8 +31,13 @@ pipeline {
                 echo "Integration Test"
             }
         }
+<<<<<<< HEAD
 
 
+=======
+        
+      
+>>>>>>> 5eba1260e03973ddaef4837c72a1596761017652
         stage('Build Docker Image') {
             steps {
                 //docker build -t arundhwaj/FootballMatch:Prod-v1
@@ -48,7 +53,11 @@ pipeline {
                         dockerImage.push()
                         dockerImage.push('latest')
                     }
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 5eba1260e03973ddaef4837c72a1596761017652
                 }
             }
         }
