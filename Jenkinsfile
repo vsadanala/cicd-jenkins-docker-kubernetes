@@ -41,17 +41,7 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                  }
-
-                }
-            }
-        }
-        
+       
         stage('Push image') {
          withCredentials([usernamePassword( credentialsId: 'mydockerhub', usernameVariable: 'arundhwaj', passwordVariable: 'arundhwaj123')]) {
         def registry_url = "registry.hub.docker.com/"
