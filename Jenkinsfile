@@ -1,11 +1,11 @@
 //DECLARATIVE
 pipeline {
-    // agent any
-    agent { docker { image 'maven:3.6.3'}}
+    agent any
+    //agent { myDockerHub { image 'maven:3.6.3'}}
     environment{
-        dockerHome = tool 'myDocker'
-        mavenHome = tool 'myMaven'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+       dockerHome = tool 'myDocker'
+       mavenHome = tool 'myMaven'
+       PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
     stages {
         stage('Build') {
@@ -29,6 +29,27 @@ pipeline {
         stage('Integration Test') {
             steps {
                 echo "Integration Test"
+            }
+        }
+
+
+        stage('Build Docker Image') {
+            steps {
+                //docker build -t arundhwaj/FootballMatch:Prod-v1
+                script {
+                    dockerImage = docker.build("arundhwaj/hello-world-jenkins:${env.BUILD_TAG}")
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('', 'dockerhub') {
+                        dockerImage.push()
+                        dockerImage.push('latest')
+                    }
+
+                }
             }
         }
     }
