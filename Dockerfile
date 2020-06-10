@@ -3,4 +3,4 @@ VOLUME /tmp
 EXPOSE 8000
 ADD target/*.jar app.jar
 ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java -jar /app.jar" ]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar /app.jar" ]
