@@ -42,11 +42,12 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    withCredentials([usernamePassword( credentialsId: 'mydockerhub', usernameVariable: 'arundhwaj', passwordVariable: 'arundhwaj123')]) {
                     docker.withRegistry('https://registry.hub.docker.com', 'mydockerhub') {
                         dockerImage.push()
                         dockerImage.push('latest')
                     }
-
+                  }  
                 }
             }
         }
