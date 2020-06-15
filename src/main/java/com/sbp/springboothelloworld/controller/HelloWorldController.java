@@ -4,10 +4,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
+
+    private String Hello = "hello";
+    private String world = "world";
+
     @RequestMapping("/")
     public String hello()
     {
-        return "Hello sbp";
+        return Hello + " " + world;
     }
 
 }

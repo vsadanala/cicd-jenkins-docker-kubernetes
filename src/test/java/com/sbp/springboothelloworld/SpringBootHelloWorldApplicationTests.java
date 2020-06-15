@@ -9,5 +9,4 @@ class SpringBootHelloWorldApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
