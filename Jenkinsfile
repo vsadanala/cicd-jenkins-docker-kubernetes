@@ -53,10 +53,8 @@ pipeline {
 
     post {
         always {
-            echo 'I run always'
-        }
-        success {
-            echo 'I run when i m suceessful'
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
         }
         failure {
             echo 'I run when i m failure'
