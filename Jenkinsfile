@@ -52,11 +52,7 @@ pipeline {
         
           stage('JUnitTest') {
               steps {
-                  /* `make check` returns non-zero on test failures,
-                  * using `true` to allow the Pipeline to continue nonetheless
-                  */
-                  sh 'make check || true' 
-                  junit '**/target/*.xml' 
+                  echo'JUnit5 Testing'
               }
           }
           
