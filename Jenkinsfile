@@ -49,13 +49,10 @@ pipeline {
                 }
             }
         }    
-        
-          stage('JUnitTest') {
-              steps {
-                  echo'JUnit5 Testing'
-              }
-          }
-          
+      
+        stage('Publish test results') {
+            junit '**/test-results/test/*.xml'
+        } 
     }
 
     post {
