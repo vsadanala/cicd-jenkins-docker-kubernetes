@@ -53,8 +53,8 @@ pipeline {
        
      stage('Build and Test') {
         steps {
-            sh 'build here...'
-            sh 'run tests here if you like ...'
+            echo 'build here...'
+            echo 'run tests here if you like ...'
         }
      }
  
