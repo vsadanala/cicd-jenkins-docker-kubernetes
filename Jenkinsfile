@@ -62,7 +62,7 @@ pipeline {
 
     post {
          always {
-           junit '**/reports/junit/*.xml'
+           echo 'JUnit'
         }
         failure {
             echo 'I run when i m failure'
