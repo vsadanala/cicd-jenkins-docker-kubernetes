@@ -49,12 +49,15 @@ pipeline {
                 }
             }
         }    
-      
-        stage('Publish test results') {
-            steps {
-                junit '**/test-results/test/*.xml'
-            }    
-        } 
+   
+       
+     stage('Build and Test') {
+        steps {
+            sh 'build here...'
+            sh 'run tests here if you like ...'
+        }
+     }
+ 
     }
 
     post {
