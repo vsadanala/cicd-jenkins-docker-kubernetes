@@ -14,7 +14,7 @@ public class HelloWorldController {
         return Hello + " " + world;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String hello1()
     {
         return Hello + " " + world;
