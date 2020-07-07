@@ -52,7 +52,7 @@ pipeline {
         stage('Sonarqube analysis') {
             steps {
                 script {
-                    scannerHome = tool 'sonar_scanner';
+                    scannerHome = tool 'SonarQube';
                 }
              }
         }
